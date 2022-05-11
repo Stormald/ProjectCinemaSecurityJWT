@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectCinemaSecurityBack.Models;
 using ProjectCinemaSecurityBack.Services;
 
@@ -14,7 +15,7 @@ namespace ProjectCinemaSecurityBack.Controllers
             service = Service;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public FilmModel GetFilmById(int id)
         {
             return this.service.GetFilmById(id);
@@ -26,19 +27,19 @@ namespace ProjectCinemaSecurityBack.Controllers
             return this.service.GetFilms();
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public FilmModel AddFilm(FilmModel film)
         {
             return this.service.AddFilm(film);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "Admin")]
         public FilmModel UpdateFilm(FilmModel film)
         {
             return this.service.UpdateFilm(film);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public IActionResult DeleteFilm(int id)
         {
             try
@@ -48,7 +49,7 @@ namespace ProjectCinemaSecurityBack.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest("Invalide request" + e.Message);
             }
 
         }
