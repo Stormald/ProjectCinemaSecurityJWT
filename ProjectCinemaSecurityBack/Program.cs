@@ -54,10 +54,12 @@ builder.Services.AddEntityFrameworkMySql().AddDbContext<CinemaContext>(options =
 //repositories
 builder.Services.AddTransient<FilmRepository, FilmRepository>();
 builder.Services.AddTransient<LoginRepository, LoginRepository>();
+builder.Services.AddTransient<ReviewRepository, ReviewRepository>();
 
 //services
 builder.Services.AddTransient<FilmService, FilmService>();
 builder.Services.AddTransient<LoginService, LoginService>();
+builder.Services.AddTransient<ReviewService, ReviewService>();
 
 
 var app = builder.Build();
