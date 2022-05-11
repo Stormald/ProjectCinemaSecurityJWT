@@ -1,5 +1,5 @@
 export class Film {
-    Id: number;
-    Name: string;
-    UrlImg: string;
+    id: number;
+    name: string;
+    urlImg: string;
 }
