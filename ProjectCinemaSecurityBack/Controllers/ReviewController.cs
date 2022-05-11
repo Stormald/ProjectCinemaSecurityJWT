@@ -33,7 +33,7 @@ namespace ProjectCinemaSecurityBack.Controllers
             return this.service.GetReviews();
         }
 
-        [HttpPost/*, Authorize(Roles = "Admin")*/]
+        [HttpPost, Authorize]
         public ReviewModel AddReview(ReviewModel review)
         {
             return this.service.AddReview(review);

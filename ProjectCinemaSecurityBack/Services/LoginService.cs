@@ -41,11 +41,12 @@ namespace ProjectCinemaSecurityBack.Services
             return this.repository.UpdateUser(user);
         }
 
-        public AuthResponse Login( LoginModel user)
+        public LoginModel Login( LoginModel user)
         {
-            AuthResponse authResponse = new AuthResponse();
+            LoginModel authResponse = new LoginModel();
+            (bool verif, long userId) = this.CheckCredentials(user);
 
-            if (CheckCredentials(user))
+            if (verif)
             {
 
                 List<Claim> claims = new List<Claim>
@@ -63,23 +64,23 @@ namespace ProjectCinemaSecurityBack.Services
                     issuer: "https://localhost:7153",
                     audience: "https://localhost:7153",
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(5),
+                    expires: DateTime.Now.AddMinutes(30),
                     signingCredentials: signinCredentials
                 );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                return new AuthResponse { Token = tokenString };
+                return new LoginModel { Token = tokenString, Username = user.Username, Id = userId };
             }
             return authResponse;
         }
 
-        private bool CheckCredentials(LoginModel user)
+        private (bool, long) CheckCredentials(LoginModel user)
         {
             LoginModel login = this.repository.GetUserByNameAndPassword(user.Username, user.Password);
             if(login == null)
             {
-                return false;
+                return (false, 0);
             }
-            return true;
+            return (true, login.Id);
         }
     }
 }

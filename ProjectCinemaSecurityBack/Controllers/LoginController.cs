@@ -25,7 +25,7 @@ namespace ProjectCinemaSecurityBack.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel user)
         {
-            AuthResponse reponse = this.service.Login(user);
+            LoginModel reponse = this.service.Login(user);
             if(reponse == null)
             {
                 return BadRequest("Invalid request");

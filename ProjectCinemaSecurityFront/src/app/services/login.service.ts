@@ -24,8 +24,8 @@ export class LoginService {
     return this.http.post<Login>(`${environment.apiUrl}/Login`, login)
   }
 
-  login(login: Login): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/Login/login`, login);
+  login(login: Login): Observable<Login> {
+    return this.http.post<Login>(`${environment.apiUrl}/Login/login`, login);
   }
 
   updateUser(login: Login): Observable<Login> {
