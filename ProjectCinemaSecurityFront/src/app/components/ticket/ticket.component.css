@@ -1,0 +1,14 @@
+.col{
+    margin: 20px;
+}
+
+img{
+    max-width: 200px;
+    margin: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card{
+    text-align: center;
+}

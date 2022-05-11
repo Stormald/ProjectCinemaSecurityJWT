@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Film } from 'src/app/models/film.model';
 import { FilmService } from 'src/app/services/film.service';
 
@@ -9,9 +10,13 @@ import { FilmService } from 'src/app/services/film.service';
 })
 export class ListFilmComponent implements OnInit {
 
-  films : Array<Film> = [];
+  films;
 
-  constructor(private service: FilmService) { }
+  constructor(private router: Router, private service: FilmService) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    }
+  }
 
   ngOnInit(): void {
     this.loadFilms();
@@ -20,7 +25,7 @@ export class ListFilmComponent implements OnInit {
   loadFilms(): void{
     this.service.getAllFilms().subscribe((data: any) =>{
       this.films = data;
+      console.log(this.films);
     })
   }
-
 }
