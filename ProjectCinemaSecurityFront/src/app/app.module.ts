@@ -11,23 +11,37 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { TicketComponent } from './components/ticket/ticket.component';
-import { LoginComponent } from './components/login/login.component'
+import { JwtModule } from '@auth0/angular-jwt';
+import { LoginModule } from './components/login/login.module';
+
+
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ListFilmComponent,
     FilmComponent,
-    TicketComponent,
-    LoginComponent
+    TicketComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    LoginModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:7153"],
+        disallowedRoutes: []
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
