@@ -15,7 +15,7 @@ namespace ProjectCinemaSecurityBack.Controllers
             service = Service;
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}")]
         public FilmModel GetFilmById(int id)
         {
             return this.service.GetFilmById(id);

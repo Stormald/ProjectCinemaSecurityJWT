@@ -10,14 +10,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { TicketComponent } from './components/ticket/ticket.component'
+import { TicketComponent } from './components/ticket/ticket.component';
+import { LoginComponent } from './components/login/login.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     ListFilmComponent,
     FilmComponent,
-    TicketComponent
+    TicketComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
