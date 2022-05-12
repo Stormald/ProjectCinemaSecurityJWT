@@ -1,14 +1,17 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
+<section class="vh-100 bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
 
-    <!-- Login Form -->
-    <form #loginForm="ngForm" (ngSubmit)="connexion(loginForm)">
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]="credentials.username" required="">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" [(ngModel)]="credentials.password" required="">
-      <div *ngIf="invalidLogin">Mauvais nom d'utilisateur ou de mot de passe.</div>
-      <input type="submit" [disabled]="!loginForm.valid" class="fadeIn fourth" value="Log In">
-    </form>
+        <!-- Login Form -->
+        <form #loginForm="ngForm" (ngSubmit)="connexion(loginForm)">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]="credentials.username" required="">
+          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" [(ngModel)]="credentials.password" required="">
+          <div *ngIf="invalidLogin">Mauvais nom d'utilisateur ou de mot de passe.</div>
+          <input type="submit" [disabled]="!loginForm.valid" class="fadeIn fourth" value="Log In">
+        </form>
 
-  </div>
-</div>
+      </div>
+    </div>
+  </section>

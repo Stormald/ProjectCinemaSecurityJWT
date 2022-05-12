@@ -13,6 +13,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginModule } from './components/login/login.module';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 export function tokenGetter() {
@@ -25,7 +27,9 @@ export function tokenGetter() {
     AppComponent,
     ListFilmComponent,
     FilmComponent,
-    TicketComponent
+    TicketComponent,
+    InscriptionComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
