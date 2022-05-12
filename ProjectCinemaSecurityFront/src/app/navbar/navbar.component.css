@@ -214,3 +214,7 @@
     transform: rotate(-19deg);
     opacity: 0.2;
   }
+
+  .ok{
+    justify-content: flex-end;
+  }
