@@ -4,10 +4,11 @@ import { FilmComponent } from './components/film/film.component';
 import { ListFilmComponent } from './components/list-film/list-film.component';
 import { LoginComponent } from './components/login/login.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
     {path:'film/:id', component: FilmComponent},
-    {path:'film/:id/ticket', component: TicketComponent},
+    {path:'film/:id/ticket', component: TicketComponent , canActivate: [AuthGuard]},
     {path:'login', component: LoginComponent},
     {path:'**', component: ListFilmComponent}
 ];
