@@ -14,7 +14,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
 
   invalidLogin!: boolean;
-  credentials: Login = { username: '', password: '' };
+  credentials: Login = { username: '', password: '', token: '' };
   login: Login;
 
   constructor(
@@ -29,10 +29,11 @@ export class LoginComponent implements OnInit {
     if(form.valid){
       this.service.login(this.credentials)
       .subscribe({
-        next: (res: AuthResponse) => {
+        next: (res: Login) => {
           console.log(res);
           const token = res.token;
           localStorage.setItem("jwt", token);
+          localStorage.setItem("userId", `${res.id}`)
           this.invalidLogin = false;
           this.router.navigate(["/"])
         },
