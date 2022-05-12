@@ -22,6 +22,7 @@ namespace ProjectCinemaSecurityBack.Repositories
         public void DeleteFilm(int id)
         {
             this.context.FilmModel.Remove(this.context.FilmModel.FirstOrDefault(a => a.Id == id));
+            this.context.SaveChanges();
         }
 
         public FilmModel GetFilmById(int id)
