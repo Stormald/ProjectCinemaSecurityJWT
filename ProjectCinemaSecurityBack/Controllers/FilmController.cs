@@ -45,7 +45,7 @@ namespace ProjectCinemaSecurityBack.Controllers
             try
             {
                 this.service.DeleteFilm(id);
-                return Ok("The listPerso got deleted.");
+                return Ok();
             }
             catch (Exception e)
             {
