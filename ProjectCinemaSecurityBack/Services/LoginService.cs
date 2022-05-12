@@ -58,7 +58,7 @@ namespace ProjectCinemaSecurityBack.Services
                 {
                     claims.Add(new Claim(ClaimTypes.Role, "Admin"));
                 }
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ma clé super secrète"));
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ma cle super secrete"));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var tokenOptions = new JwtSecurityToken(
                     issuer: "https://localhost:7153",

@@ -16,12 +16,12 @@ import decode from 'jwt-decode';
 })
 export class FilmComponent implements OnInit {
 
-idFilm: any;
-currentFilm: Film;
-reviews: Array<Review>;
-reviewForm: FormGroup;
-jwtHelper = new JwtHelperService();
-  constructor(private route: ActivatedRoute, private service: FilmService, private reviewService: ReviewService) { 
+  idFilm: any;
+  currentFilm: Film;
+  reviews: Array<Review>;
+  reviewForm: FormGroup;
+  jwtHelper = new JwtHelperService();
+  constructor(private route: ActivatedRoute, private service: FilmService, private reviewService: ReviewService) {
     this.idFilm = this.route.snapshot.params["id"];
     this.reviewForm = new FormGroup({
       scoreControl: new FormControl(null, Validators.required),
@@ -30,19 +30,19 @@ jwtHelper = new JwtHelperService();
   }
 
   ngOnInit(): void {
-    
+
     this.loadFilm();
     this.loadReviews();
   }
 
   loadFilm(): void {
-    this.service.getFilmById(this.idFilm).subscribe((data:any) => {
+    this.service.getFilmById(this.idFilm).subscribe((data: any) => {
       this.currentFilm = data;
     })
   }
 
   loadReviews(): void {
-    this.reviewService.getReviewsByIdFilm(this.idFilm).subscribe((data:any) => {
+    this.reviewService.getReviewsByIdFilm(this.idFilm).subscribe((data: any) => {
       this.reviews = data;
     })
   }
@@ -57,7 +57,7 @@ jwtHelper = new JwtHelperService();
 
       console.log(review);
 
-      this.reviewService.addReview(review).subscribe((data: any) => {
+      this.reviewService.addReview(review).subscribe((data: string) => {
         this.loadReviews();
       });
 
@@ -72,18 +72,20 @@ jwtHelper = new JwtHelperService();
 
   isAdminAuthenticated = (): boolean => {
     const token = localStorage.getItem("jwt");
-    const tokenPayload: Object = decode(token);
     let role = "";
-    //console.log(tokenPayload);
-    for (const [key, value] of Object.entries(tokenPayload)) {
-      //console.log(`${key}: ${value}`);
-      if(key == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"){
-        role = value;
+    if (token) {
+      const tokenPayload: Object = decode(token);
+      //console.log(tokenPayload);
+      for (const [key, value] of Object.entries(tokenPayload)) {
+        //console.log(`${key}: ${value}`);
+        if (key == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role") {
+          role = value;
+        }
       }
+      console.log(role);
     }
-    console.log(role);
     //console.log(Object.entries(tokenPayload).values["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
-    if(token && !this.jwtHelper.isTokenExpired(token)){
+    if (token && !this.jwtHelper.isTokenExpired(token) && role == "Admin") {
       return true;
     }
     else {
@@ -93,9 +95,8 @@ jwtHelper = new JwtHelperService();
 
   isUserAuthenticated = (): boolean => {
     const token = localStorage.getItem("jwt");
-    const tokenPayload = decode(token);
-    console.log(tokenPayload);
-    if(token && !this.jwtHelper.isTokenExpired(token)){
+
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
       return true;
     }
     else {
@@ -104,12 +105,12 @@ jwtHelper = new JwtHelperService();
   }
 
   supprimerReview = (id: number) => {
-    if(this.isAdminAuthenticated()){
+    if (this.isAdminAuthenticated()) {
       this.reviewService.delete(id).subscribe((data: any) => {
         this.loadReviews();
       });
     }
-    
+
   }
 
 }

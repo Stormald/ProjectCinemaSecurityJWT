@@ -51,7 +51,7 @@ namespace ProjectCinemaSecurityBack.Controllers
             try
             {
                 this.service.DeleteReview(id);
-                return Ok("The listPerso got deleted.");
+                return Ok();
             }
             catch (Exception e)
             {

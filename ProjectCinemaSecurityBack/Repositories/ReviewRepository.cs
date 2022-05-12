@@ -21,7 +21,17 @@ namespace ProjectCinemaSecurityBack.Repositories
 
         public void DeleteReview(int id)
         {
-            this.context.ReviewModel.Remove(this.context.ReviewModel.FirstOrDefault(a => a.Id == id));
+            ReviewModel review = this.context.ReviewModel.FirstOrDefault(a => a.Id == id);
+            if(review != null)
+            {
+               this.context.ReviewModel.Remove(review);
+               this.context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Prob");
+            }
+            
         }
 
         public ReviewModel GetReviewById(int id)
