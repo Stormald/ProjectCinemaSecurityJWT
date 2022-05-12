@@ -56,8 +56,6 @@ export class FilmComponent implements OnInit {
       review.loginModelId = parseInt(localStorage.getItem("userId"));
       review.filmModelId = parseInt(this.idFilm);
 
-      console.log(review);
-
       this.reviewService.addReview(review).subscribe((data: string) => {
         this.loadReviews();
       });
@@ -76,16 +74,12 @@ export class FilmComponent implements OnInit {
     let role = "";
     if (token) {
       const tokenPayload: Object = decode(token);
-      //console.log(tokenPayload);
       for (const [key, value] of Object.entries(tokenPayload)) {
-        //console.log(`${key}: ${value}`);
         if (key == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role") {
           role = value;
         }
       }
-      console.log(role);
     }
-    //console.log(Object.entries(tokenPayload).values["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
     if (token && !this.jwtHelper.isTokenExpired(token) && role == "Admin") {
       return true;
     }
