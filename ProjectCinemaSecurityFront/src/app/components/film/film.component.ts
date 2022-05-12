@@ -20,6 +20,7 @@ export class FilmComponent implements OnInit {
   currentFilm: Film;
   reviews: Array<Review>;
   reviewForm: FormGroup;
+  //boolDisabled = true;
   jwtHelper = new JwtHelperService();
   constructor(private route: ActivatedRoute, private service: FilmService, private reviewService: ReviewService) {
     this.idFilm = this.route.snapshot.params["id"];
