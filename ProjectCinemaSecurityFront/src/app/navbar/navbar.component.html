@@ -6,13 +6,14 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse ok" id="navcol-1">
-
-                
+            <div class="collapse navbar-collapse ok" *ngIf="!isUserAuthenticated()" id="navcol-1">
                 <span class="navbar-text">
                     <a class="login" href="/login">Log In</a>
                 </span>
                 <a class="btn btn-light action-button" role="button" href="/inscription">Signup</a>
+            </div>
+            <div class="collapse navbar-collapse ok" *ngIf="isUserAuthenticated()" id="navcol-1">
+                <a class="btn btn-light action-button" role="button" (click)="logout()">Log Out</a>
             </div>
         </div>
     </nav>
